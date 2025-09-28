@@ -36,15 +36,14 @@
       "label": "SuiteCRM Application",  
       "onAutoForward": "notify"  
     },  
-    "4200": {  
+    "5000": {  
       "label": "Angular Dev Server",  
       "onAutoForward": "notify"  
-    },  
-    "3000": {  
-      "label": "Node.js Dev Server",  
-      "onAutoForward": "notify"  
-    }  
-  },  
-    
-  "postCreateCommand": "bash ./scripts/setup.sh"
+    }
+  },
+  "postCreateCommand": "bash ./scripts/start.sh",
+  "mounts": [
+    "type=volume,source=suitecrm_node_modules,target=/workspace/node_modules",
+    "type=volume,source=suitecrm_vendor,target=/workspace/vendor"
+  ]
 }
