@@ -34,8 +34,8 @@ RUN set -eux; \
 WORKDIR /workspace
 
 # App code (adjust source paths as needed)
-COPY SuiteCRM-8.9.0-dev/ /workspace/
-COPY scripts/ /workspace/scripts/
+# COPY SuiteCRM-8.9.0-dev/ /workspace/
+# COPY scripts/ /workspace/scripts/
 
 # # Writable dirs for runtime
 # RUN set -eux; \

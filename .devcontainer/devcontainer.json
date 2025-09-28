@@ -41,9 +41,5 @@
       "onAutoForward": "notify"  
     }
   },
-  "postCreateCommand": "bash ./scripts/start.sh",
-  "mounts": [
-    "type=volume,source=suitecrm_node_modules,target=/workspace/node_modules",
-    "type=volume,source=suitecrm_vendor,target=/workspace/vendor"
-  ]
+  "postCreateCommand": "bash ./scripts/start.sh"
 }

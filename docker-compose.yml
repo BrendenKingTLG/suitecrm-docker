@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile  
     volumes:  
       - ./suitecrm:/workspace:cached  
-      - ./devcontainer/scripts:/workspace/scripts  
+      - ./.devcontainer/scripts:/workspace/scripts  
     environment:  
       - NODE_ENV=development  
       - APP_ENV=dev  

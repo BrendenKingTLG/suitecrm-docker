@@ -7,13 +7,14 @@ cd /workspace
 [ -d vendor ] || composer install --no-interaction --no-progress
 
 # Frontend deps
-if [ -f package.json ]; then
+if [ -f package.json ] && [ ! -d node_modules ]; then
   rm -rf public/dist
   yarn install
+  yarn merge-angular-json
   yarn build
 fi
 
-# Optional: ensure dev bundle present
+# resolve missing dev dep
 php -r 'class_exists("Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle")||exit(1);' \
   || composer require --dev doctrine/doctrine-fixtures-bundle:^3.6
 
@@ -39,11 +40,11 @@ if [ ! -f out/.installed.flag ] && [ ! -f public/legacy/config.php ]; then
     -P "${DB_PASS}" \
     -u "${SITE_USERNAME:-admin}" -p "${SITE_PASSWORD:-Admin123!}" \
     -S "${SITE_HOST:-http://localhost:8080}"
-
+  mkdir ./out
   touch out/.installed.flag
 fi
 
 php bin/console cache:clear || true
 php bin/console cache:warmup || true
 
-exec php -S 0.0.0.0:8080 -t public public/index.php
+exec php -S 0.0.0.0:8080 -t public
