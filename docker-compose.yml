@@ -1,0 +1,39 @@
+version: '3.8'  
+  
+services:  
+  app:  
+    build:  
+      context: .  
+      dockerfile: Dockerfile  
+    volumes:  
+      - ./suitecrm:/workspace:cached  
+      - ./suitecrm/node_modules:/workspace/node_modules  
+      - ./suitecrm/vendor:/workspace/vendor  
+    environment:  
+      - NODE_ENV=development  
+      - APP_ENV=dev  
+      - DATABASE_URL=mysql://suitecrm:suitecrm@db:3306/suitecrm  
+    depends_on:  
+      - db  
+    ports:  
+      - "8080:8080"  
+      - "4200:4200"  
+      - "3000:3000"  
+    command: sleep infinity  
+  
+  db:  
+    image: mysql:8.0  
+    environment:  
+      MYSQL_ROOT_PASSWORD: root  
+      MYSQL_DATABASE: suitecrm  
+      MYSQL_USER: suitecrm  
+      MYSQL_PASSWORD: suitecrm  
+    ports:  
+      - "3306:3306"  
+    volumes:  
+      - mysql_data:/var/lib/mysql  
+  
+volumes:  
+  mysql_data:  
+  node_modules:  
+  vendor:
